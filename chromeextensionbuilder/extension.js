@@ -5,7 +5,14 @@ const path = require('path');
 function activate(context) {
 
     let importStructureCommand = vscode.commands.registerCommand('extension.importProjectStructure', async function () {
-        // Open a dialog to select the JSON file
+        const workspaceFolders = vscode.workspace.workspaceFolders;
+        if (!workspaceFolders) {
+            vscode.window.showErrorMessage('Please open a folder in VSCode before running this command.');
+            return;
+        }
+
+        const rootPath = workspaceFolders[0].uri.fsPath;
+
         const fileUri = await vscode.window.showOpenDialog({
             canSelectFiles: true,
             canSelectFolders: false,
@@ -23,16 +30,7 @@ function activate(context) {
         const jsonContent = fs.readFileSync(filePath, 'utf8');
 
         try {
-            // Parse the JSON structure
             const structure = JSON.parse(jsonContent);
-            const workspaceFolders = vscode.workspace.workspaceFolders;
-            if (!workspaceFolders) {
-                vscode.window.showErrorMessage('Please open a folder in VSCode before running this command.');
-                return;
-            }
-            const rootPath = workspaceFolders[0].uri.fsPath;
-
-            // Create the project structure
             createStructure(rootPath, structure);
             vscode.window.showInformationMessage('Project structure imported successfully!');
         } catch (error) {
@@ -47,7 +45,6 @@ function createStructure(basePath, structure) {
     for (const folder in structure) {
         const folderPath = path.join(basePath, folder);
 
-        // Create the folder if it doesn't exist
         if (!fs.existsSync(folderPath)) {
             fs.mkdirSync(folderPath);
         }
@@ -56,11 +53,18 @@ function createStructure(basePath, structure) {
         const files = folderContents.files || [];
         const subfolders = folderContents.folders || [];
 
-        // Create files within the current folder
+        // Create files with content from templates
         files.forEach((file) => {
             const filePath = path.join(folderPath, file);
             if (!fs.existsSync(filePath)) {
-                fs.writeFileSync(filePath, '');
+                const templatePath = path.join(__dirname, 'templates', file);
+                let content = '';
+
+                if (fs.existsSync(templatePath)) {
+                    content = fs.readFileSync(templatePath, 'utf8');
+                }
+
+                fs.writeFileSync(filePath, content);
             }
         });
 
@@ -71,8 +75,6 @@ function createStructure(basePath, structure) {
         });
     }
 }
-
-
 
 function deactivate() {}
 

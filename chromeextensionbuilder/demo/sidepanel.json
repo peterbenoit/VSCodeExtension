@@ -1,0 +1,23 @@
+{
+    "my-sidepanel-extension": {
+        "files": [
+            "manifest.json",
+            "background.js",
+            "sidepanel.html"
+        ],
+        "folders": [
+            "css",
+            "js"
+        ],
+        "css": {
+            "files": [
+                "sidepanel.css"
+            ]
+        },
+        "js": {
+            "files": [
+                "sidepanel.js"
+            ]
+        }
+    }
+}
