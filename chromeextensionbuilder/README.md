@@ -10,21 +10,18 @@ This VSCode extension generates a barebones Chrome extension project with a side
 
 ## Usage
 
-1. **Install the Extension**:
-   - Clone the repository or download the `.vsix` file and install it in your VSCode environment.
-
-2. **Generate a New Chrome Extension Project**:
+1. **Generate a New Chrome Extension Project**:
    - Open VSCode and create a new workspace or folder where you want the Chrome extension project to be generated.
-   - Use the Command Palette (Ctrl+Shift+P or Cmd+Shift+P on Mac) and run the command `Import Project Structure`.
+   - Use the Command Palette (`Ctrl+Shift+P` or `Cmd+Shift+P` on Mac) and run the command `Import Project Structure`.
    - Select the JSON file that defines the project structure.
 
-3. **JSON Structure for Project Generation**:
+2. **JSON Structure for Project Generation**:
    The extension relies on a JSON file that defines the structure of the Chrome extension project. Here’s an example of what the JSON file might look like:
 
    - The project includes files like `manifest.json`, `background.js`, and `sidepanel.html`.
    - It also creates folders like `css` and `js`, and adds files `sidepanel.css` and `sidepanel.js` to these folders.
 
-4. **Generated Project Structure**:
+3. **Generated Project Structure**:
    Once the command is executed, the specified files and folders will be created in your workspace, setting up the basic structure for your Chrome extension.
 
 ## Project Templates
@@ -37,11 +34,9 @@ Contributions are welcome! Feel free to open an issue or submit a pull request.
 
 ## License
 
-This project is licensed under the MIT License. See the `LICENSE` file for details.
+This project is licensed under the MIT License.
 
 ## Acknowledgements
 
-- VSCode API Documentation
-- Chrome Extensions Documentation
-
-**Enjoy!**
+- [VSCode API Documentation](https://code.visualstudio.com/api)
+- [Chrome Extensions Documentation](https://developer.chrome.com/docs/extensions/mv3/)
