@@ -12,10 +12,16 @@
   "activationEvents": ["onCommand:extension.importProjectStructure"],
   "main": "./extension.js",
   "contributes": {
-    "commands": [{
-      "command": "extension.importProjectStructure",
-      "title": "Import Project Structure"
-    }]
+    "commands": [
+        {
+            "command": "extension.importSidePanelStructure",
+            "title": "Import Side Panel Extension"
+        },
+        {
+            "command": "extension.importPopupStructure",
+            "title": "Import Popup Extension"
+        }
+    ]
   },
   "scripts": {
     "lint": "eslint .",
