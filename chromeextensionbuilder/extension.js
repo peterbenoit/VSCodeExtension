@@ -56,6 +56,7 @@ function createStructure(basePath, structure) {
         // Create files with content from templates
         files.forEach((file) => {
             const filePath = path.join(folderPath, file);
+            console.log('Writing file to:', filePath);
             if (!fs.existsSync(filePath)) {
                 const templatePath = path.join(__dirname, 'templates', file);
                 let content = '';
@@ -75,6 +76,8 @@ function createStructure(basePath, structure) {
         });
     }
 }
+
+
 
 function deactivate() {}
 
