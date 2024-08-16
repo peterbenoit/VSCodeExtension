@@ -4,42 +4,46 @@ const path = require('path');
 
 function activate(context) {
 
-    let importStructureCommand = vscode.commands.registerCommand('extension.importProjectStructure', async function () {
-        const workspaceFolders = vscode.workspace.workspaceFolders;
-        if (!workspaceFolders) {
-            vscode.window.showErrorMessage('Please open a folder in VSCode before running this command.');
-            return;
-        }
-
-        const rootPath = workspaceFolders[0].uri.fsPath;
-
-        const fileUri = await vscode.window.showOpenDialog({
-            canSelectFiles: true,
-            canSelectFolders: false,
-            canSelectMany: false,
-            filters: {
-                'JSON Files': ['json']
-            }
-        });
-
-        if (!fileUri || fileUri.length === 0) {
-            return; // User cancelled the dialog
-        }
-
-        const filePath = fileUri[0].fsPath;
-        const jsonContent = fs.readFileSync(filePath, 'utf8');
-
-        try {
-            const structure = JSON.parse(jsonContent);
-            createStructure(rootPath, structure);
-            vscode.window.showInformationMessage('Project structure imported successfully!');
-        } catch (error) {
-            vscode.window.showErrorMessage(`Failed to import project structure: ${error.message}`);
-        }
+    let importSidePanelCommand = vscode.commands.registerCommand('extension.importSidePanelStructure', async function () {
+        await importStructure('sidepanel.json');
     });
 
-    context.subscriptions.push(importStructureCommand);
+    let importPopupCommand = vscode.commands.registerCommand('extension.importPopupStructure', async function () {
+        await importStructure('popup.json');
+    });
+
+    context.subscriptions.push(importSidePanelCommand);
+    context.subscriptions.push(importPopupCommand);
 }
+
+async function importStructure(configFileName) {
+    const workspaceFolders = vscode.workspace.workspaceFolders;
+    if (!workspaceFolders) {
+        vscode.window.showErrorMessage('Please open a folder in VSCode before running this command.');
+        return;
+    }
+
+    const rootPath = workspaceFolders[0].uri.fsPath;
+    const configPath = path.join(__dirname, 'templates', configFileName);  // Updated to look inside the 'templates' folder
+
+    console.log('Looking for configuration file at:', configPath);  // Log the path being checked
+
+    if (!fs.existsSync(configPath)) {
+        vscode.window.showErrorMessage('Configuration file not found.');
+        return;
+    }
+
+    const jsonContent = fs.readFileSync(configPath, 'utf8');
+
+    try {
+        const structure = JSON.parse(jsonContent);
+        createStructure(rootPath, structure);
+        vscode.window.showInformationMessage('Project structure imported successfully!');
+    } catch (error) {
+        vscode.window.showErrorMessage(`Failed to import project structure: ${error.message}`);
+    }
+}
+
 
 function createStructure(basePath, structure) {
     for (const folder in structure) {
@@ -55,7 +59,14 @@ function createStructure(basePath, structure) {
 
         // Create files with content from templates
         files.forEach((file) => {
-            const filePath = path.join(folderPath, file);
+            let destinationFile = file;
+
+            // Rename manifest file to manifest.json if needed
+            if (file.startsWith('manifest-')) {
+                destinationFile = 'manifest.json';
+            }
+
+            const filePath = path.join(folderPath, destinationFile);
             console.log('Writing file to:', filePath);
             if (!fs.existsSync(filePath)) {
                 const templatePath = path.join(__dirname, 'templates', file);
@@ -76,7 +87,6 @@ function createStructure(basePath, structure) {
         });
     }
 }
-
 
 
 function deactivate() {}
