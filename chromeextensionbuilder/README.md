@@ -8,6 +8,10 @@ This VSCode extension generates a barebones Chrome extension project with a side
 - Pre-built Templates: Includes template files for `manifest.json`, `background.js`, `sidepanel.html`, `sidepanel.css`, and `sidepanel.js`.
 - Customizable: Easily modify the generated templates to suit your needs.
 
+## How to Run this Project
+- Open extension.js and press F5. Alternatively, you can choose Run > Start Debugging, or open the Run and Debug panel and click Run and Debug.
+- A new VSCode window will open. Select or Create a Folder for the new project to exist in, and then open the Command Palette (`Ctrl+Shift+P` or `Cmd+Shift+P` on Mac) and run the command `Import Project Structure`.
+
 ## Usage
 
 1. **Generate a New Chrome Extension Project**:
