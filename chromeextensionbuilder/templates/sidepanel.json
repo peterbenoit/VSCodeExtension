@@ -1,7 +1,7 @@
 {
     "my-sidepanel-extension": {
         "files": [
-            "manifest.json",
+            "manifest-sidepanel.json",
             "background.js",
             "sidepanel.html"
         ],

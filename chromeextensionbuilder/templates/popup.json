@@ -1,7 +1,7 @@
 {
     "my-popup-extension": {
         "files": [
-            "manifest.json",
+            "manifest-popup.json",
             "background.js",
             "popup.html"
         ],
