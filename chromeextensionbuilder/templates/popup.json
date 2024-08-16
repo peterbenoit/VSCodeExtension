@@ -1,0 +1,23 @@
+{
+    "my-popup-extension": {
+        "files": [
+            "manifest.json",
+            "background.js",
+            "popup.html"
+        ],
+        "folders": [
+            "css",
+            "js"
+        ],
+        "css": {
+            "files": [
+                "popup.css"
+            ]
+        },
+        "js": {
+            "files": [
+                "popup.js"
+            ]
+        }
+    }
+}
