@@ -45,6 +45,7 @@ async function importStructure(configFileName) {
 }
 
 
+
 function createStructure(basePath, structure) {
     for (const folder in structure) {
         const folderPath = path.join(basePath, folder);
