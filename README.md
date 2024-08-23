@@ -1,11 +1,11 @@
-# Chrome Extension Side Panel Generator
+# Chrome Extension Generator
 
-This VSCode extension generates a barebones Chrome extension project with a side panel. The generated project includes all the necessary files and structure to help you quickly start building your Chrome extension with a side panel.
+This VSCode extension generates a barebones Chrome extension (manifest v3) project with a side panel or a popup. The generated project includes all the necessary files and structure to help you quickly start building your Chrome extension.
 
 ## Features
 
-- Automatic Project Generation: Generates the required files and folders for a basic Chrome extension with a side panel.
-- Pre-built Templates: Includes template files for `manifest.json`, `background.js`, `sidepanel.html`, `sidepanel.css`, and `sidepanel.js`.
+- Automatic Project Generation: Generates the required files and folders for a basic Chrome extension.
+- Pre-built Templates: Includes template files for `manifest.json`, `background.js`, including `sidepanel.html`, `sidepanel.css`, and `sidepanel.js` OR  `popup.html`, `popup.css`, and `popup.js`
 - Customizable: Easily modify the generated templates to suit your needs.
 
 ## How to Run this Project
@@ -22,8 +22,8 @@ This VSCode extension generates a barebones Chrome extension project with a side
 2. **JSON Structure for Project Generation**:
    The extension relies on a JSON file that defines the structure of the Chrome extension project. Here’s an example of what the JSON file might look like:
 
-   - The project includes files like `manifest.json`, `background.js`, and `sidepanel.html`.
-   - It also creates folders like `css` and `js`, and adds files `sidepanel.css` and `sidepanel.js` to these folders.
+   - The project includes files such as `manifest.json`, `background.js`, and `sidepanel.html`.
+   - It also creates folders like `css` and `js`, and adds the appropriate files to these folders.
 
 3. **Generated Project Structure**:
    Once the command is executed, the specified files and folders will be created in your workspace, setting up the basic structure for your Chrome extension.
